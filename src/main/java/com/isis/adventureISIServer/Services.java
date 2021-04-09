@@ -9,6 +9,7 @@ import com.isis.adventureISIServer.generated.PallierType;
 import com.isis.adventureISIServer.generated.PalliersType;
 import com.isis.adventureISIServer.generated.ProductType;
 import com.isis.adventureISIServer.generated.ProductsType;
+import com.isis.adventureISIServer.generated.TyperatioType;
 import com.isis.adventureISIServer.generated.World;
 import java.io.File;
 import java.io.FileInputStream;
@@ -31,20 +32,19 @@ import javax.xml.bind.Unmarshaller;
 public class Services {
 
     public World readWorldFromXml(String username) throws JAXBException {
-        
+
         JAXBContext jaxbContext;
-         World world = new World();
+        World world = new World();
         jaxbContext = JAXBContext.newInstance(World.class);
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-        try{
+        try {
             InputStream input = new FileInputStream(username + "-world.xml");
-             world = (World) jaxbUnmarshaller.unmarshal(input);
-        }catch (Exception e){
-             InputStream input1 = getClass().getClassLoader().getResourceAsStream("world.xml");
+            world = (World) jaxbUnmarshaller.unmarshal(input);
+        } catch (Exception e) {
+            InputStream input1 = getClass().getClassLoader().getResourceAsStream("world.xml");
             world = (World) jaxbUnmarshaller.unmarshal(input1);
         }
-       
-      
+
         return world;
     }
 
@@ -62,7 +62,7 @@ public class Services {
 
     public World getWorld(String pseudo) throws JAXBException {
         World world = this.readWorldFromXml(pseudo);
-        if (world.getLastupdate()==0){
+        if (world.getLastupdate() == 0) {
             world.setLastupdate(System.currentTimeMillis());
             this.saveWorldXml(world, pseudo);
         }
@@ -84,12 +84,13 @@ public class Services {
 
     public Boolean updateProduct(String username, ProductType newproduct) throws JAXBException {
         // aller chercher le monde qui correspond au joueur
-        
+
         World world = getWorld(username);
         // trouver dans ce monde, le produit équivalent à celui passé
         // en paramètre
 
         ProductType product = findProductById(world, newproduct.getId());
+        System.out.println(product);
         if (product == null) {
             return false;
         }
@@ -101,11 +102,39 @@ public class Services {
             double argent = world.getMoney();
             double debit = (qtchange * product.getCout()) + (qtchange * product.getCroissance());
             world.setMoney(argent);
-            product.setQuantite(qtchange);
+            product.setQuantite(newproduct.getQuantite());
 
         } else {
             product.setTimeleft(product.getVitesse());
             world.setLastupdate(System.currentTimeMillis());
+        }
+        List<PallierType> palliers = product.getPalliers().getPallier();
+        for (PallierType m : palliers) {
+            int quantite = product.getQuantite();
+            int seuil = m.getSeuil();
+
+            if (quantite >= seuil) {
+
+                TyperatioType p = m.getTyperatio();
+                TyperatioType g = TyperatioType.GAIN;
+                TyperatioType v = TyperatioType.VITESSE;
+                TyperatioType a = TyperatioType.ANGE;
+
+                if (p.equals(g)) {
+                    double multip = product.getRevenu() * m.getRatio();
+                    product.setRevenu(multip);
+                    m.setUnlocked(true);
+                } else if (p.equals(v)) {
+                    double nvVitesse = product.getVitesse() / m.getRatio();
+                    product.setVitesse((int) nvVitesse);
+                    m.setUnlocked(true);
+                } else if (p.equals(a)) {
+                    double newratio = world.getAngelbonus()+m.getRatio();
+                        world.setAngelbonus((int) newratio);
+
+                }
+            }
+
         }
         // sauvegarder les changements du monde
         saveWorldXml(world, username);
@@ -113,12 +142,13 @@ public class Services {
     }
 
     public Boolean updateManager(String username, PallierType newmanager) throws JAXBException {
-      
+
         // aller chercher le monde qui correspond au joueur
         World world = getWorld(username);
         // trouver dans ce monde, le manager équivalent à celui passé
         // en paramètre
         PallierType manager = findManagerByName(world, newmanager.getName());
+        System.out.println(manager);
         if (manager == null) {
             return false;
         }
@@ -130,7 +160,8 @@ public class Services {
             return false;
         }
         // débloquer le manager de ce produit
-        product.getPalliers().getPallier().add(manager);
+
+        manager.setUnlocked(true);
         int cout = manager.getSeuil();
         double newmoney = world.getMoney() - cout;
         world.setMoney(newmoney);
@@ -142,45 +173,211 @@ public class Services {
     public PallierType findManagerByName(World world, String name) {
         List<PallierType> managers = world.getManagers().getPallier();
         PallierType manager = new PallierType();
+        System.out.println(manager);
         for (PallierType m : managers) {
             if (m.getName().equals(name)) {
                 manager = m;
+                System.out.println("Je suis le manager :" + manager);
+                return manager;
             } else {
                 manager = null;
             }
 
         }
-        return manager;
+        return null;
     }
 
     public Boolean updateWorld(World world) throws JAXBException {
         // aller chercher le monde qui correspond au joueur        
         Double revenu = 0.0;
         Long passe = System.currentTimeMillis() - world.getLastupdate();
-        if(passe!=0){
-         List<ProductType> produits = world.getProducts().getProduct();
-    
-        for (ProductType p : produits) {
-        if (p.getTimeleft() <= passe && p.getTimeleft()!=0) {
-            revenu = p.getRevenu()*p.getQuantite();
-        }
-        int nbProduits = (int) (passe /p.getVitesse());
-        
-        if (p.isManagerUnlocked()) {
-            revenu=nbProduits * (p.getRevenu());
-            long time = passe % p.getVitesse();
-            if (time > 0) {
-                p.setTimeleft(time);
+        if (passe != 0) {
+            List<ProductType> produits = world.getProducts().getProduct();
+
+            for (ProductType p : produits) {
+                if (p.getTimeleft() <= passe && p.getTimeleft() != 0) {
+                    revenu = p.getRevenu() * p.getQuantite();
+                }
+                int nbProduits = (int) (passe / p.getVitesse());
+
+                if (p.isManagerUnlocked()) {
+                    revenu = nbProduits * (p.getRevenu());
+                    long time = passe % p.getVitesse();
+                    if (time > 0) {
+                        p.setTimeleft(time);
+                    }
+                }
+
             }
+            world.setMoney(world.getMoney() + revenu);
+            world.setScore(world.getScore() + revenu);
+            world.setLastupdate(System.currentTimeMillis());
         }
-        
-    }
-        world.setMoney(world.getMoney()+revenu);
-        world.setScore(world.getScore()+revenu);
-        world.setLastupdate(System.currentTimeMillis());
-        }
-        
+
         return true;
     }
+
+    public Boolean updateUpgrade(String username, PallierType newupgrade) throws JAXBException {
+
+        // aller chercher le monde qui correspond au joueur
+        World world = getWorld(username);
+        // trouver dans ce monde, le manager équivalent à celui passé
+        // en paramètre
+        PallierType upgrade = findUpgradeByName(world, newupgrade.getName());
+        if (upgrade == null) {
+            return false;
+        }
+        System.out.println(upgrade);
+        upgrade.setUnlocked(true);
+        int cout = upgrade.getSeuil();
+        double newmoney = world.getMoney() - cout;
+
+        world.setMoney(newmoney);
+        TyperatioType p = upgrade.getTyperatio();
+        TyperatioType g = TyperatioType.GAIN;
+        TyperatioType v = TyperatioType.VITESSE;
+        // débloquer ce manager
+        if (upgrade.getIdcible() == 0) {
+            List<ProductType> produits = world.getProducts().getProduct();
+            for (ProductType prod : produits) {
+                if (p.equals(g)) {
+                    double multip = prod.getRevenu() * upgrade.getRatio();
+                    prod.setRevenu(multip);
+                } else if (p.equals(v)) {
+                    double nvVitesse = prod.getVitesse() / upgrade.getRatio();
+                    prod.setVitesse((int) nvVitesse);
+
+                }
+            }
+        } else if (upgrade.getIdcible() == -1) {
+            double newratio = world.getAngelbonus()+upgrade.getRatio();
+                    world.setAngelbonus((int) newratio);
+        } else {
+            // trouver le produit correspondant au manager
+            ProductType product = findProductById(world, upgrade.getIdcible());
+            if (product == null) {
+                return false;
+            }
+            // débloquer le manager de ce produit
+
+            if (p.equals(g)) {
+                double multip = product.getRevenu() * upgrade.getRatio();
+                product.setRevenu(multip);
+            } else if (p.equals(v)) {
+                double nvVitesse = product.getVitesse() / upgrade.getRatio();
+                product.setVitesse((int) nvVitesse);
+            }
+        }
+        saveWorldXml(world, username);
+        return true;
+    }
+
+    public PallierType findUpgradeByName(World world, String name) {
+        List<PallierType> upgrades = world.getUpgrades().getPallier();
+        PallierType upgrade = new PallierType();
+        for (PallierType u : upgrades) {
+            if (u.getName().equals(name)) {
+                upgrade = u;
+            } else {
+                u = null;
+            }
+
+        }
+        return upgrade;
+    }
+    
+    public void resetWorld(String pseudo) throws JAXBException {
+        World world = getWorld(pseudo);
+        Double score = world.getScore();
+        //Double AngeSupp = 150 * Math.sqrt(score / Math.pow(10, 15)) - world.getTotalangels();
+        Double AngeSupp =15*score;
+        Double active = world.getActiveangels();
+        Double total = world.getTotalangels();
+        System.out.println("anges :" + AngeSupp);
+        world.setActiveangels(active + AngeSupp);
+        world.setTotalangels(total + AngeSupp);
+        
+        System.out.println("active :" + world.getActiveangels());
+        System.out.println("total :"+ world.getTotalangels());
+       
+        
+        World nvWorld = new World();
+        nvWorld.setScore(score);
+        nvWorld.setTotalangels(world.getTotalangels());
+        nvWorld.setActiveangels(world.getActiveangels());
+        saveWorldXml(nvWorld, pseudo);
+        
+    }
+    
+    public Boolean updateAngel(String username, PallierType newangel) throws JAXBException {
+
+        // aller chercher le monde qui correspond au joueur
+        World world = getWorld(username);
+        // trouver dans ce monde, le manager équivalent à celui passé
+        // en paramètre
+        PallierType upgrade = findAngelByName(world, newangel.getName());
+        if (upgrade == null) {
+            return false;
+        }
+        System.out.println(upgrade);
+        upgrade.setUnlocked(true);
+        int cout = upgrade.getSeuil();
+        double newAngelmoney = world.getActiveangels() - cout;
+
+        world.setActiveangels(newAngelmoney );
+        TyperatioType p = upgrade.getTyperatio();
+        TyperatioType g = TyperatioType.GAIN;
+        TyperatioType v = TyperatioType.VITESSE;
+        // débloquer ce manager
+        if (upgrade.getIdcible() == 0) {
+            List<ProductType> produits = world.getProducts().getProduct();
+            for (ProductType prod : produits) {
+                if (p.equals(g)) {
+                    double multip = prod.getRevenu() * upgrade.getRatio();
+                    prod.setRevenu(multip);
+                } else if (p.equals(v)) {
+                    double nvVitesse = prod.getVitesse() / upgrade.getRatio();
+                    prod.setVitesse((int) nvVitesse);
+
+                }
+            }
+        } else if (upgrade.getIdcible() == -1) {
+            double newratio = world.getAngelbonus() + upgrade.getRatio();
+            world.setAngelbonus((int) newratio);
+
+        } else {
+            // trouver le produit correspondant au manager
+            ProductType product = findProductById(world, upgrade.getIdcible());
+            if (product == null) {
+                return false;
+            }
+            // débloquer le manager de ce produit
+
+            if (p.equals(g)) {
+                double multip = product.getRevenu() * upgrade.getRatio();
+                product.setRevenu(multip);
+            } else if (p.equals(v)) {
+                double nvVitesse = product.getVitesse() / upgrade.getRatio();
+                product.setVitesse((int) nvVitesse);
+            }
+        }
+        saveWorldXml(world, username);
+        return true;
+    }
+    
+    public PallierType findAngelByName(World world, String name) {
+        List<PallierType> anges = world.getAngelupgrades().getPallier();
+        PallierType ange = new PallierType();
+        for (PallierType a : anges) {
+            if (a.getName().equals(name)) {
+                ange = a;
+            } else {
+                a = null;
+            }
+
+        }
+        return ange;
+    }
+
 
 }

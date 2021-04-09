@@ -10,6 +10,7 @@ import com.isis.adventureISIServer.generated.ProductType;
 import com.isis.adventureISIServer.generated.World;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -41,6 +42,8 @@ public class Webservices {
         return Response.ok(world).build();
 
     }
+    
+    //Il faut un DELETE qui fournit un reload de la page avec un nouveau monde 
 
     @PUT
     @Path("product")
@@ -56,5 +59,30 @@ public class Webservices {
     public void addmanager(PallierType newmanager, @Context HttpServletRequest request) throws JAXBException {
         String pseudo = request.getHeader("X-user");
         services.updateManager(pseudo, newmanager);
+    }
+    
+    @PUT
+    @Path("upgrade")
+    @Consumes({MediaType.APPLICATION_JSON})
+    public void addupgrade(PallierType newupgrade, @Context HttpServletRequest request) throws JAXBException {
+        String pseudo = request.getHeader("X-user");
+        services.updateUpgrade(pseudo, newupgrade);
+    }
+
+    @DELETE
+    @Path("world")
+    @Consumes({MediaType.APPLICATION_JSON})
+    public void resetworld( @Context HttpServletRequest request) throws JAXBException {
+        String username = request.getHeader("X-user");
+        services.resetWorld(username);
+
+    }
+    
+    @PUT
+    @Path("angel")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public void addangel(PallierType newmanager, @Context HttpServletRequest request) throws JAXBException {
+        String pseudo = request.getHeader("X-user");
+        services.updateAngel(pseudo, newmanager);
     }
 }
