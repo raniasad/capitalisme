@@ -9,8 +9,8 @@ and open the template in the editor.
 <world
     xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
     xsi:noNamespaceSchemaLocation='../java/worldSchema.xsd'>
-    <name>Terre</name>
-    <logo>icones/terre.png</logo>
+    <name>Les rebelles de la forêt</name>
+    <logo>icones/rebelle.png</logo>
     <money>10</money>
     <score>10</score>
     <totalangels>0</totalangels>
@@ -20,8 +20,8 @@ and open the template in the editor.
     <products>
         <product>
             <id>1</id>
-            <name>Limonade</name>
-            <logo>icones/limonade.png</logo>
+            <name>Scratchy</name>
+            <logo>icones/chatnoir.png</logo>
             <cout>4</cout>
             <croissance>1.07</croissance>
             <revenu>1</revenu>
@@ -31,7 +31,7 @@ and open the template in the editor.
             <managerUnlocked>false</managerUnlocked>
             <palliers>
                 <pallier>
-                    <name>Limonade</name>
+                    <name>Scratchy</name>
                     <logo>icones/limonade.png</logo>
                     <idcible>1</idcible>                                 
                     <seuil>11</seuil>   
@@ -40,7 +40,7 @@ and open the template in the editor.
                     <typeratio>gain</typeratio>
                 </pallier>
                 <pallier>
-                    <name>Limonade</name>
+                    <name>Scratchy</name>
                     <logo>icones/limonade.png</logo>
                     <idcible>1</idcible>                                 
                     <seuil>15</seuil>   
@@ -49,7 +49,7 @@ and open the template in the editor.
                     <typeratio>gain</typeratio>
                 </pallier>
                 <pallier>
-                    <name>Limonade</name>
+                    <name>Scratchy</name>
                     <logo>icones/limonade.png</logo>
                     <idcible>1</idcible>                                 
                     <seuil>20</seuil>   
@@ -61,8 +61,8 @@ and open the template in the editor.
         </product>
         <product>
             <id>2</id>
-            <name>Journal</name>
-            <logo>icones/journal.png</logo>
+            <name>Winnie l'Ourson</name>
+            <logo>icones/winnie.png</logo>
             <cout>60</cout>
             <croissance>1.15</croissance>
             <revenu>60</revenu>
@@ -72,8 +72,8 @@ and open the template in the editor.
             <managerUnlocked>false</managerUnlocked>
             <palliers> 
                 <pallier>
-                    <name>Journal</name>
-                    <logo>icones/journal.png</logo>
+                    <name>Winnie l'Ourson</name>
+                    <logo>icones/winnie.png</logo>
                     <idcible>1</idcible>                                 
                     <seuil>6</seuil>   
                     <unlocked>false</unlocked>
@@ -81,8 +81,8 @@ and open the template in the editor.
                     <typeratio>vitesse</typeratio>
                 </pallier>
                 <pallier>
-                    <name>Journal</name>
-                    <logo>icones/journal.png</logo>
+                    <name>Winnie l'Ourson</name>
+                    <logo>icones/winnie.png</logo>
                     <idcible>1</idcible>                                 
                     <seuil>35</seuil>   
                     <unlocked>false</unlocked>
@@ -90,8 +90,8 @@ and open the template in the editor.
                     <typeratio>gain</typeratio>
                 </pallier>
                 <pallier>
-                    <name>Journal</name>
-                    <logo>icones/journal.png</logo>
+                    <name>Winnie l'Ourson</name>
+                    <logo>icones/winnie.png</logo>
                     <idcible>1</idcible>                                 
                     <seuil>100</seuil>   
                     <unlocked>false</unlocked>
@@ -102,8 +102,8 @@ and open the template in the editor.
         </product>
         <product>
             <id>3</id>
-            <name>Carwash</name>
-            <logo>icones/carwash.png</logo>
+            <name>Gros Minet</name>
+            <logo>icones/gros minet.png</logo>
             <cout>210.0</cout>
             <croissance>1.15</croissance>
             <revenu>600.0</revenu>
@@ -113,8 +113,8 @@ and open the template in the editor.
             <managerUnlocked>false</managerUnlocked>
             <palliers>
                 <pallier>
-                    <name>Carwash</name>
-                    <logo>icones/carwash.png</logo>
+                    <name>Gros Minet</name>
+                    <logo>icones/gros minet.png</logo>
                     <seuil>5</seuil>
                     <idcible>1</idcible>
                     <ratio>2.0</ratio>
@@ -122,8 +122,8 @@ and open the template in the editor.
                     <typeratio>vitesse</typeratio>
                 </pallier>
                 <pallier>
-                    <name>Carwash</name>
-                    <logo>icones/carwash.png</logo>
+                    <name>Gros Minet</name>
+                    <logo>icones/gros minet.png</logo>
                     <seuil>20</seuil>
                     <idcible>1</idcible>
                     <ratio>5.0</ratio>
@@ -131,8 +131,8 @@ and open the template in the editor.
                     <typeratio>vitesse</typeratio>
                 </pallier>
                 <pallier>
-                    <name>Carwash</name>
-                    <logo>icones/carwash.png</logo>
+                    <name>Gros Minet</name>
+                    <logo>icones/gros minet.png</logo>
                     <seuil>100</seuil>
                     <idcible>1</idcible>
                     <ratio>10.0</ratio>
@@ -143,8 +143,8 @@ and open the template in the editor.
         </product>
         <product>
             <id>4</id>
-            <name>Pizza</name>
-            <logo>icones/pizza.png</logo>
+            <name>Abu</name>
+            <logo>icones/abu.png</logo>
             <cout>300</cout>
             <croissance>1.25</croissance>
             <revenu>780.0</revenu>
@@ -154,8 +154,8 @@ and open the template in the editor.
             <managerUnlocked>false</managerUnlocked>
             <palliers>
                 <pallier>
-                    <name>Pizza</name>
-                    <logo>icones/pizza.png</logo>
+                    <name>Abu</name>
+                    <logo>icones/abu.png</logo>
                     <seuil>5</seuil>
                     <idcible>1</idcible>
                     <ratio>2.0</ratio>
@@ -163,8 +163,8 @@ and open the template in the editor.
                     <typeratio>vitesse</typeratio>
                 </pallier>
                 <pallier>
-                    <name>Pizza</name>
-                    <logo>icones/pizza.png</logo>
+                    <name>Abu</name>
+                    <logo>icones/abu.png</logo>
                     <seuil>20</seuil>
                     <idcible>1</idcible>
                     <ratio>5.0</ratio>
@@ -174,9 +174,9 @@ and open the template in the editor.
             </palliers>
         </product>
         <product>
-            <id>4</id>
-            <name>Donut</name>
-            <logo>icones/donut.png</logo>
+            <id>5</id>
+            <name>Perry</name>
+            <logo>icones/perry.png</logo>
             <cout>600</cout>
             <croissance>1.60</croissance>
             <revenu>1080.0</revenu>
@@ -186,8 +186,8 @@ and open the template in the editor.
             <managerUnlocked>false</managerUnlocked>
             <palliers>
                 <pallier>
-                    <name>Donut</name>
-                    <logo>icones/donut.png</logo>
+                    <name>Perry</name>
+                    <logo>icones/perry.png</logo>
                     <seuil>5</seuil>
                     <idcible>1</idcible>
                     <ratio>2.0</ratio>
@@ -195,8 +195,40 @@ and open the template in the editor.
                     <typeratio>vitesse</typeratio>
                 </pallier>
                 <pallier>
-                    <name>Donutt</name>
-                    <logo>icones/donut.png</logo>
+                    <name>Perry</name>
+                    <logo>icones/perry.png</logo>
+                    <seuil>20</seuil>
+                    <idcible>1</idcible>
+                    <ratio>5.0</ratio>
+                    <unlocked>false</unlocked>
+                    <typeratio>vitesse</typeratio>
+                </pallier>     
+            </palliers>
+        </product>
+        <product>
+            <id>6</id>
+            <name>Salamandre</name>
+            <logo>icones/salamandre.png</logo>
+            <cout>600</cout>
+            <croissance>1.60</croissance>
+            <revenu>1080.0</revenu>
+            <vitesse>32000</vitesse>
+            <quantite>1</quantite>
+            <timeleft>0</timeleft>
+            <managerUnlocked>false</managerUnlocked>
+            <palliers>
+                <pallier>
+                    <name>Salamandre</name>
+                    <logo>icones/salamandre.png</logo>
+                    <seuil>5</seuil>
+                    <idcible>1</idcible>
+                    <ratio>2.0</ratio>
+                    <unlocked>false</unlocked>
+                    <typeratio>vitesse</typeratio>
+                </pallier>
+                <pallier>
+                    <name>Salamandre</name>
+                    <logo>icones/salamandre.png</logo>
                     <seuil>20</seuil>
                     <idcible>1</idcible>
                     <ratio>5.0</ratio>
@@ -209,8 +241,8 @@ and open the template in the editor.
     </products>
     <allunlocks>
         <pallier>
-            <name>Limonade</name>
-            <logo>icones/limonade.png</logo>
+            <name>Scratchy</name>
+            <logo>icones/chatnoir.png</logo>
             <seuil>30</seuil>
             <idcible>1</idcible>
             <ratio>8</ratio>
@@ -218,8 +250,8 @@ and open the template in the editor.
             <unlocked>false</unlocked>
         </pallier>
         <pallier>
-            <name>Journal</name>
-            <logo>icones/journal.png</logo>
+            <name>Winnie l'Ourson</name>
+            <logo>icones/winnie.png</logo>
             <seuil>100</seuil>
             <idcible>0</idcible>
             <ratio>10</ratio>
@@ -349,26 +381,38 @@ and open the template in the editor.
     <managers>
         <pallier>
             <idcible>1</idcible>
-            <logo>icones/managerlimonade.png</logo>
-            <name>Coralie Monade</name>                 
+            <logo>icones/homer.png</logo>
+            <name>Homer</name>                 
             <seuil>10</seuil>   
         </pallier>
         <pallier>
             <idcible>2</idcible>
-            <logo>icones/managerjournal.png</logo>
-            <name>Carter Paper</name>                 
+            <logo>icones/jcw.png</logo>
+            <name>Jean-Christophe</name>                 
             <seuil>15000</seuil>   
         </pallier>
         <pallier>
             <idcible>3</idcible>
-            <logo>icones/managercarwash.png</logo>
-            <name>Oscar Wash</name>                 
+            <logo>icones/titie.png</logo>
+            <name>Titie</name>                 
             <seuil>26000</seuil>   
         </pallier>
         <pallier>
+            <idcible>4</idcible>
+            <logo>icones/aladdin.png</logo>
+            <name>Aladdin</name>                 
+            <seuil>30000</seuil>   
+        </pallier>
+        <pallier>
             <idcible>5</idcible>
-            <logo>icones/managerdonut.png</logo>
-            <name>Cupidon U.T</name>                 
+            <logo>icones/phineas.png</logo>
+            <name>Phineas</name>                 
+            <seuil>30000</seuil>   
+        </pallier>
+        <pallier>
+            <idcible>6</idcible>
+            <logo>icones/elsa.png</logo>
+            <name>Elsa</name>                 
             <seuil>30000</seuil>   
         </pallier>
     </managers>
