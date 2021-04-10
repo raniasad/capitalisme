@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><world>
     <name>Terre</name>
     <logo>icones/terre.png</logo>
-    <money>10.0</money>
-    <score>10.0</score>
-    <totalangels>0.0</totalangels>
-    <activeangels>0.0</activeangels>
+    <money>970.0</money>
+    <score>1552.0</score>
+    <totalangels>14310.0</totalangels>
+    <activeangels>14310.0</activeangels>
     <angelbonus>2</angelbonus>
-    <lastupdate>1618002300677</lastupdate>
+    <lastupdate>1618044881543</lastupdate>
     <products>
         <product>
             <id>1</id>
@@ -17,7 +17,7 @@
             <revenu>1.0</revenu>
             <vitesse>1000</vitesse>
             <quantite>10</quantite>
-            <timeleft>0</timeleft>
+            <timeleft>1000</timeleft>
             <managerUnlocked>false</managerUnlocked>
             <palliers>
                 <pallier>
@@ -314,7 +314,7 @@
             <logo>icones/ange.png</logo>
             <seuil>2</seuil>
             <idcible>1</idcible>
-            <ratio>1.0</ratio>
+            <ratio>2.0</ratio>
             <typeratio>gain</typeratio>
             <unlocked>false</unlocked>
         </pallier>

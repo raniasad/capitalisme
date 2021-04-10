@@ -72,9 +72,10 @@ public class Webservices {
     @DELETE
     @Path("world")
     @Consumes({MediaType.APPLICATION_JSON})
-    public void resetworld( @Context HttpServletRequest request) throws JAXBException {
+    public Response resetworld( @Context HttpServletRequest request) throws JAXBException {
         String username = request.getHeader("X-user");
-        services.resetWorld(username);
+        World world=services.resetWorld(username);
+        return Response.ok(world).build();
 
     }
     

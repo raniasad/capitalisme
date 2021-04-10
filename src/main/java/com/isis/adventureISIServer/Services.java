@@ -13,11 +13,14 @@ import com.isis.adventureISIServer.generated.TyperatioType;
 import com.isis.adventureISIServer.generated.World;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.Context;
 import javax.xml.bind.JAXBContext;
@@ -101,6 +104,7 @@ public class Services {
         if (qtchange > 0) {
             double argent = world.getMoney();
             double debit = (qtchange * product.getCout()) + (qtchange * product.getCroissance());
+            
             world.setMoney(argent);
             product.setQuantite(newproduct.getQuantite());
 
@@ -129,14 +133,15 @@ public class Services {
                     product.setVitesse((int) nvVitesse);
                     m.setUnlocked(true);
                 } else if (p.equals(a)) {
-                    double newratio = world.getAngelbonus()+m.getRatio();
-                        world.setAngelbonus((int) newratio);
+                    double newratio = world.getAngelbonus() + m.getRatio();
+                    world.setAngelbonus((int) newratio);
 
                 }
             }
 
         }
         // sauvegarder les changements du monde
+
         saveWorldXml(world, username);
         return true;
     }
@@ -165,7 +170,6 @@ public class Services {
         int cout = manager.getSeuil();
         double newmoney = world.getMoney() - cout;
         world.setMoney(newmoney);
-
         saveWorldXml(world, username);
         return true;
     }
@@ -196,12 +200,12 @@ public class Services {
 
             for (ProductType p : produits) {
                 if (p.getTimeleft() <= passe && p.getTimeleft() != 0) {
-                    revenu = p.getRevenu() * p.getQuantite();
+                    revenu = p.getRevenu() * p.getQuantite()*(1+world.getActiveangels()*world.getAngelbonus()/100);
                 }
                 int nbProduits = (int) (passe / p.getVitesse());
 
                 if (p.isManagerUnlocked()) {
-                    revenu = nbProduits * (p.getRevenu());
+                    revenu = nbProduits * (p.getRevenu())*(1+world.getActiveangels()*world.getAngelbonus()/100);
                     long time = passe % p.getVitesse();
                     if (time > 0) {
                         p.setTimeleft(time);
@@ -211,6 +215,7 @@ public class Services {
             }
             world.setMoney(world.getMoney() + revenu);
             world.setScore(world.getScore() + revenu);
+            System.out.println("score ici:"+world.getScore() + revenu);
             world.setLastupdate(System.currentTimeMillis());
         }
 
@@ -250,8 +255,8 @@ public class Services {
                 }
             }
         } else if (upgrade.getIdcible() == -1) {
-            double newratio = world.getAngelbonus()+upgrade.getRatio();
-                    world.setAngelbonus((int) newratio);
+            double newratio = world.getAngelbonus() + upgrade.getRatio();
+            world.setAngelbonus((int) newratio);
         } else {
             // trouver le produit correspondant au manager
             ProductType product = findProductById(world, upgrade.getIdcible());
@@ -268,6 +273,7 @@ public class Services {
                 product.setVitesse((int) nvVitesse);
             }
         }
+        updateWorld(world);
         saveWorldXml(world, username);
         return true;
     }
@@ -285,30 +291,37 @@ public class Services {
         }
         return upgrade;
     }
-    
-    public void resetWorld(String pseudo) throws JAXBException {
-        World world = getWorld(pseudo);
+
+    public World resetWorld(String pseudo) throws JAXBException {
+        World world = this.getWorld(pseudo);
         Double score = world.getScore();
+        System.out.println("score :" + score);
         //Double AngeSupp = 150 * Math.sqrt(score / Math.pow(10, 15)) - world.getTotalangels();
-        Double AngeSupp =15*score;
-        Double active = world.getActiveangels();
-        Double total = world.getTotalangels();
+        Double AngeSupp = 15 * score;
+        Double active = world.getActiveangels()+AngeSupp;
+        Double total = world.getTotalangels()+ AngeSupp;
         System.out.println("anges :" + AngeSupp);
-        world.setActiveangels(active + AngeSupp);
-        world.setTotalangels(total + AngeSupp);
-        
+        world.setActiveangels(active);
+        world.setTotalangels(total);
+
         System.out.println("active :" + world.getActiveangels());
-        System.out.println("total :"+ world.getTotalangels());
+        System.out.println("total :" + world.getTotalangels());
+        World world1 = new World();
+        saveWorldXml(world1, pseudo);
+        JAXBContext jaxbContext;
+        jaxbContext = JAXBContext.newInstance(World.class);
+        Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+        InputStream input1 = getClass().getClassLoader().getResourceAsStream("world.xml");
+        World nvWorld = (World) jaxbUnmarshaller.unmarshal(input1);
        
-        
-        World nvWorld = new World();
         nvWorld.setScore(score);
-        nvWorld.setTotalangels(world.getTotalangels());
-        nvWorld.setActiveangels(world.getActiveangels());
+        nvWorld.setTotalangels(total);
+        nvWorld.setActiveangels(active);
         saveWorldXml(nvWorld, pseudo);
-        
+        return nvWorld;
+
     }
-    
+
     public Boolean updateAngel(String username, PallierType newangel) throws JAXBException {
 
         // aller chercher le monde qui correspond au joueur
@@ -324,7 +337,7 @@ public class Services {
         int cout = upgrade.getSeuil();
         double newAngelmoney = world.getActiveangels() - cout;
 
-        world.setActiveangels(newAngelmoney );
+        world.setActiveangels(newAngelmoney);
         TyperatioType p = upgrade.getTyperatio();
         TyperatioType g = TyperatioType.GAIN;
         TyperatioType v = TyperatioType.VITESSE;
@@ -364,7 +377,7 @@ public class Services {
         saveWorldXml(world, username);
         return true;
     }
-    
+
     public PallierType findAngelByName(World world, String name) {
         List<PallierType> anges = world.getAngelupgrades().getPallier();
         PallierType ange = new PallierType();
@@ -378,6 +391,5 @@ public class Services {
         }
         return ange;
     }
-
 
 }

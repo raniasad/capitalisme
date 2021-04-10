@@ -2,11 +2,11 @@
     <name>Terre</name>
     <logo>icones/terre.png</logo>
     <money>10.0</money>
-    <score>10.0</score>
-    <totalangels>0.0</totalangels>
-    <activeangels>0.0</activeangels>
+    <score>120.0</score>
+    <totalangels>2100.0</totalangels>
+    <activeangels>2100.0</activeangels>
     <angelbonus>2</angelbonus>
-    <lastupdate>1618002300677</lastupdate>
+    <lastupdate>1618067016984</lastupdate>
     <products>
         <product>
             <id>1</id>
@@ -314,7 +314,7 @@
             <logo>icones/ange.png</logo>
             <seuil>2</seuil>
             <idcible>1</idcible>
-            <ratio>1.0</ratio>
+            <ratio>2.0</ratio>
             <typeratio>gain</typeratio>
             <unlocked>false</unlocked>
         </pallier>
