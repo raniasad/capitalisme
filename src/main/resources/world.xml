@@ -4,12 +4,10 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-
-
 <world
     xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
     xsi:noNamespaceSchemaLocation='../java/worldSchema.xsd'>
-    <name>Les rebelles de la forêt</name>
+    <name>Animalist</name>
     <logo>icones/rebelle.png</logo>
     <money>10</money>
     <score>10</score>
@@ -26,13 +24,13 @@ and open the template in the editor.
             <croissance>1.07</croissance>
             <revenu>1</revenu>
             <vitesse>1000</vitesse>
-            <quantite>10</quantite>
+            <quantite>1</quantite>
             <timeleft>0</timeleft>
             <managerUnlocked>false</managerUnlocked>
             <palliers>
                 <pallier>
                     <name>Scratchy</name>
-                    <logo>icones/limonade.png</logo>
+                    <logo>icones/chatnoir.png</logo>
                     <idcible>1</idcible>                                 
                     <seuil>11</seuil>   
                     <unlocked>false</unlocked>
@@ -41,59 +39,59 @@ and open the template in the editor.
                 </pallier>
                 <pallier>
                     <name>Scratchy</name>
-                    <logo>icones/limonade.png</logo>
+                    <logo>icones/chatnoir.png</logo>
                     <idcible>1</idcible>                                 
-                    <seuil>15</seuil>   
+                    <seuil>80</seuil>   
                     <unlocked>false</unlocked>
                     <ratio>5</ratio>
                     <typeratio>gain</typeratio>
                 </pallier>
                 <pallier>
                     <name>Scratchy</name>
-                    <logo>icones/limonade.png</logo>
+                    <logo>icones/chatnoir.png</logo>
                     <idcible>1</idcible>                                 
-                    <seuil>20</seuil>   
+                    <seuil>300</seuil>   
                     <unlocked>false</unlocked>
-                    <ratio>100</ratio>
-                    <typeratio>gain</typeratio>
+                    <ratio>4</ratio>
+                    <typeratio>vitesse</typeratio>
                 </pallier>
             </palliers>
         </product>
         <product>
             <id>2</id>
-            <name>Winnie l'Ourson</name>
+            <name>Winnie</name>
             <logo>icones/winnie.png</logo>
             <cout>60</cout>
             <croissance>1.15</croissance>
             <revenu>60</revenu>
             <vitesse>10000</vitesse>
-            <quantite>5</quantite>
+            <quantite>1</quantite>
             <timeleft>0</timeleft>
             <managerUnlocked>false</managerUnlocked>
             <palliers> 
                 <pallier>
-                    <name>Winnie l'Ourson</name>
+                    <name>Winnie</name>
                     <logo>icones/winnie.png</logo>
                     <idcible>1</idcible>                                 
-                    <seuil>6</seuil>   
+                    <seuil>20</seuil>   
                     <unlocked>false</unlocked>
                     <ratio>2</ratio>
                     <typeratio>vitesse</typeratio>
                 </pallier>
                 <pallier>
-                    <name>Winnie l'Ourson</name>
+                    <name>Winnie</name>
                     <logo>icones/winnie.png</logo>
                     <idcible>1</idcible>                                 
-                    <seuil>35</seuil>   
+                    <seuil>100</seuil>   
                     <unlocked>false</unlocked>
                     <ratio>5</ratio>
                     <typeratio>gain</typeratio>
                 </pallier>
                 <pallier>
-                    <name>Winnie l'Ourson</name>
+                    <name>Winnie</name>
                     <logo>icones/winnie.png</logo>
                     <idcible>1</idcible>                                 
-                    <seuil>100</seuil>   
+                    <seuil>450</seuil>   
                     <unlocked>false</unlocked>
                     <ratio>10</ratio>
                     <typeratio>gain</typeratio>
@@ -133,9 +131,9 @@ and open the template in the editor.
                 <pallier>
                     <name>Gros Minet</name>
                     <logo>icones/gros minet.png</logo>
-                    <seuil>100</seuil>
+                    <seuil>50</seuil>
                     <idcible>1</idcible>
-                    <ratio>10.0</ratio>
+                    <ratio>8.0</ratio>
                     <unlocked>false</unlocked>
                     <typeratio>gain</typeratio>
                 </pallier>
@@ -156,7 +154,7 @@ and open the template in the editor.
                 <pallier>
                     <name>Abu</name>
                     <logo>icones/abu.png</logo>
-                    <seuil>5</seuil>
+                    <seuil>20</seuil>
                     <idcible>1</idcible>
                     <ratio>2.0</ratio>
                     <unlocked>false</unlocked>
@@ -165,7 +163,7 @@ and open the template in the editor.
                 <pallier>
                     <name>Abu</name>
                     <logo>icones/abu.png</logo>
-                    <seuil>20</seuil>
+                    <seuil>60</seuil>
                     <idcible>1</idcible>
                     <ratio>5.0</ratio>
                     <unlocked>false</unlocked>
@@ -197,19 +195,19 @@ and open the template in the editor.
                 <pallier>
                     <name>Perry</name>
                     <logo>icones/perry.png</logo>
-                    <seuil>20</seuil>
+                    <seuil>80</seuil>
                     <idcible>1</idcible>
                     <ratio>5.0</ratio>
                     <unlocked>false</unlocked>
-                    <typeratio>vitesse</typeratio>
+                    <typeratio>gain</typeratio>
                 </pallier>     
             </palliers>
         </product>
         <product>
             <id>6</id>
-            <name>Salamandre</name>
+            <name>Sally</name>
             <logo>icones/salamandre.png</logo>
-            <cout>600</cout>
+            <cout>1000</cout>
             <croissance>1.60</croissance>
             <revenu>1080.0</revenu>
             <vitesse>32000</vitesse>
@@ -220,16 +218,16 @@ and open the template in the editor.
                 <pallier>
                     <name>Salamandre</name>
                     <logo>icones/salamandre.png</logo>
-                    <seuil>5</seuil>
+                    <seuil>500</seuil>
                     <idcible>1</idcible>
                     <ratio>2.0</ratio>
                     <unlocked>false</unlocked>
-                    <typeratio>vitesse</typeratio>
+                    <typeratio>gain</typeratio>
                 </pallier>
                 <pallier>
                     <name>Salamandre</name>
                     <logo>icones/salamandre.png</logo>
-                    <seuil>20</seuil>
+                    <seuil>1000</seuil>
                     <idcible>1</idcible>
                     <ratio>5.0</ratio>
                     <unlocked>false</unlocked>
@@ -273,7 +271,7 @@ and open the template in the editor.
         <pallier>
             <name>Ruée vers l'or</name>
             <logo>icones/étoile.png</logo>
-            <seuil>2500</seuil>
+            <seuil>500</seuil>
             <idcible>0</idcible>
             <ratio>50</ratio>
             <typeratio>gain</typeratio>
@@ -282,7 +280,7 @@ and open the template in the editor.
         <pallier>
             <name>Trésor</name>
             <logo>icones/étoile.png</logo>
-            <seuil>500</seuil>
+            <seuil>2500</seuil>
             <idcible>0</idcible>
             <ratio>100</ratio>
             <typeratio>gain</typeratio>
@@ -293,23 +291,23 @@ and open the template in the editor.
             <logo>icones/étoile.png</logo>
             <seuil>500</seuil>
             <idcible>0</idcible>
-            <ratio>10</ratio>
-            <typeratio>gain</typeratio>
+            <ratio>4</ratio>
+            <typeratio>ange</typeratio>
             <unlocked>false</unlocked>
         </pallier>
         <pallier>
             <name>Cash Flow</name>
             <logo>icones/étoile.png</logo>
-            <seuil>500</seuil>
+            <seuil>5000</seuil>
             <idcible>0</idcible>
-            <ratio>10</ratio>
+            <ratio>1000</ratio>
             <typeratio>gain</typeratio>
             <unlocked>false</unlocked>
         </pallier>
         <pallier>
             <name>Sonic</name>
             <logo>icones/étoile.png</logo>
-            <seuil>50</seuil>
+            <seuil>300</seuil>
             <idcible>0</idcible>
             <ratio>2</ratio>
             <typeratio>vitesse</typeratio>
@@ -318,7 +316,7 @@ and open the template in the editor.
         <pallier>
             <name>Flash</name>
             <logo>icones/étoile.png</logo>
-            <seuil>150</seuil>
+            <seuil>1500</seuil>
             <idcible>0</idcible>
             <ratio>7</ratio>
             <typeratio>vitesse</typeratio>
@@ -327,7 +325,7 @@ and open the template in the editor.
         <pallier>
             <name>Tonerre</name>
             <logo>icones/étoile.png</logo>
-            <seuil>250</seuil>
+            <seuil>2500</seuil>
             <idcible>0</idcible>
             <ratio>15</ratio>
             <typeratio>vitesse</typeratio>
@@ -336,7 +334,7 @@ and open the template in the editor.
         <pallier>
             <name>Voie lactée</name>
             <logo>icones/étoile.png</logo>
-            <seuil>500</seuil>
+            <seuil>5000</seuil>
             <idcible>0</idcible>
             <ratio>25</ratio>
             <typeratio>vitesse</typeratio>
@@ -345,7 +343,7 @@ and open the template in the editor.
         <pallier>
             <name>Jaguar</name>
             <logo>icones/étoile.png</logo>
-            <seuil>1000</seuil>
+            <seuil>12000</seuil>
             <idcible>0</idcible>
             <ratio>60</ratio>
             <typeratio>vitesse</typeratio>
@@ -389,19 +387,19 @@ and open the template in the editor.
             <idcible>2</idcible>
             <logo>icones/jcw.png</logo>
             <name>Jean-Christophe</name>                 
-            <seuil>15000</seuil>   
+            <seuil>150</seuil>   
         </pallier>
         <pallier>
             <idcible>3</idcible>
             <logo>icones/titie.png</logo>
             <name>Titie</name>                 
-            <seuil>26000</seuil>   
+            <seuil>1000</seuil>   
         </pallier>
         <pallier>
             <idcible>4</idcible>
             <logo>icones/aladdin.png</logo>
             <name>Aladdin</name>                 
-            <seuil>30000</seuil>   
+            <seuil>2500</seuil>   
         </pallier>
         <pallier>
             <idcible>5</idcible>
@@ -413,7 +411,7 @@ and open the template in the editor.
             <idcible>6</idcible>
             <logo>icones/elsa.png</logo>
             <name>Elsa</name>                 
-            <seuil>30000</seuil>   
+            <seuil>55000</seuil>   
         </pallier>
     </managers>
 

@@ -296,8 +296,8 @@ public class Services {
         World world = this.getWorld(pseudo);
         Double score = world.getScore();
         System.out.println("score :" + score);
-        Double AngeSupp = 150 * Math.sqrt(score / Math.pow(10, 15)) - world.getTotalangels();
-      
+        //Double AngeSupp = 150 * Math.sqrt(score / Math.pow(10, 15)) - world.getTotalangels();
+        Double AngeSupp = 15*score;
         Double active = world.getActiveangels()+AngeSupp;
         Double total = world.getTotalangels()+ AngeSupp;
         System.out.println("anges :" + AngeSupp);
